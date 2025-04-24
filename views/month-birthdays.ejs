@@ -1,0 +1,58 @@
+<%- include('partials/header') %>
+  <div class="container py-5">
+    <div class="mb-4">
+      <a href="/birthdays" class="btn btn-outline-primary rounded-pill shadow-sm">
+        <i class="bi bi-arrow-left me-2"></i> Volver a todos los cumpleaños
+      </a>
+    </div>
+    
+    <div class="text-center mb-5 bg-primary text-white py-4 rounded-3 shadow position-relative">
+      <h2 class="display-5 fw-bold">Cumpleaños en <%= month %></h2>
+      <div class="position-absolute top-50 start-0 translate-middle-y ms-4 d-none d-md-block">
+        <i class="bi bi-calendar-event display-4"></i>
+      </div>
+    </div>
+ 
+    <% if (birthdays.length > 0) { %>
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        <% birthdays.forEach((birthday, index) => { 
+          const cardColors = ['primary', 'success', 'info', 'warning', 'danger', 'secondary'];
+          const colorIndex = index % cardColors.length;
+          const currentColor = cardColors[colorIndex];
+        %>
+          <div class="col">
+            <div class="card h-100 shadow-sm rounded-3 mb-3 border-<%= currentColor %> hover-shadow">
+              <div class="card-header bg-<%= currentColor %> bg-opacity-10 border-bottom border-<%= currentColor %>">
+                <h5 class="card-title text-<%= currentColor %> mb-0 text-center fw-bold"><%= birthday.name %></h5>
+              </div>
+              <div class="card-body text-center py-4">
+                <div class="display-6 mb-3">
+                  <i class="bi bi-balloon text-<%= currentColor %>"></i>
+                </div>
+                <p class="card-text fs-5">
+                  <%= birthday.day %> de <%= birthday.month %>
+                </p>
+              </div>
+            </div>
+          </div>
+        <% }); %>
+      </div>
+    <% } else { %>
+      <div class="alert alert-primary border-0 shadow-sm py-4 text-center">
+        <div class="mb-3">
+          <i class="bi bi-calendar-x display-1 text-primary opacity-50"></i>
+        </div>
+        <p class="fs-4 mb-3">No hay cumpleaños registrados en <%= month %>.</p>
+      </div>
+    <% } %>
+  </div>
+
+
+  <style>
+    .hover-shadow:hover {
+      transform: translateY(-5px);
+      transition: transform 0.3s ease;
+      box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+    }
+  </style>
+<%- include('partials/footer') %>

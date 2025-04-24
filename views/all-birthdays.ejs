@@ -1,0 +1,97 @@
+<%- include('partials/header') %>
+  <div class="container py-5">
+    <!-- Encabezado con color de fondo -->
+    <div class="text-center mb-5 bg-primary text-white py-4 rounded-3 shadow">
+      <h2 class="display-5 fw-bold">Cumpleaños</h2>
+      <button
+        class="btn btn-light btn-lg rounded-pill px-4 mt-3 shadow-sm"
+        data-bs-toggle="modal"
+        data-bs-target="#filterModal"
+      >
+        <i class="bi bi-funnel-fill me-2 text-primary"></i>Filtrar por mes
+      </button>
+    </div>
+    
+    <!-- Modal de filtros -->
+    <div class="modal fade" id="filterModal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow">
+          <div class="modal-header bg-primary text-white">
+            <h5 class="modal-title">Selecciona un mes</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body p-4">
+            <div class="row g-3">
+              <%
+                const monthsInOrder = [
+                  'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+                  'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+                ];
+                
+                const monthColors = [
+                  'primary', 'secondary', 'success', 'danger', 'warning', 'info',
+                  'primary', 'secondary', 'success', 'danger', 'warning', 'info'
+                ];
+               
+                monthsInOrder.forEach((month, index) => {
+              %>
+                <div class="col-4">
+                  <a
+                    href="/birthdays/<%= month.toLowerCase() %>"
+                    class="btn btn-outline-<%= monthColors[index] %> w-100 mb-2 rounded-pill"
+                  >
+                    <%= month %>
+                  </a>
+                </div>
+              <% }); %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Contenedor de tarjetas de cumpleaños -->
+    <div id="birthdays-container" class="row row-cols-1 row-cols-md-3 g-4">
+      <% if (birthdays.length === 0) { %>
+        <div class="col-12 text-center">
+          <div class="alert alert-primary border-0 shadow-sm py-4">
+            <i class="bi bi-emoji-smile fs-1 mb-3"></i>
+            <p class="mb-0 fs-5">No hay cumpleaños registrados. ¡Agrega uno nuevo!</p>
+          </div>
+        </div>
+      <% } else { %>
+        <% birthdays.forEach((birthday, index) => { 
+          const cardColors = ['primary', 'success', 'info', 'warning', 'danger', 'secondary'];
+          const colorIndex = index % cardColors.length;
+          const currentColor = cardColors[colorIndex];
+        %>
+          <div class="col">
+            <div class="card h-100 shadow-sm rounded-3 mb-3 border-<%= currentColor %> hover-shadow">
+              <div class="card-header bg-<%= currentColor %> bg-opacity-10 border-bottom border-<%= currentColor %>">
+                <h5 class="card-title text-<%= currentColor %> mb-0 text-center fw-bold"><%= birthday.name %></h5>
+              </div>
+              <div class="card-body text-center py-4">
+                <div class="display-6 mb-3">
+                  <i class="bi bi-balloon text-<%= currentColor %>"></i>
+                </div>
+                <p class="card-text fs-5">
+                  <%= birthday.day %> de <%= birthday.month %>
+                </p>
+              </div>
+            </div>
+          </div>
+        <% }); %>
+      <% } %>
+    </div>
+  </div>
+
+  </div>
+
+  <style>
+    .hover-shadow:hover {
+      transform: translateY(-5px);
+      transition: transform 0.3s ease;
+      box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+    }
+  </style>
+<%- include('partials/footer') %>
