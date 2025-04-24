@@ -13,6 +13,7 @@ const birthdaysData = [
   { day: 3, month: 'Abril', name: 'Ricky' },
   { day: 13, month: 'Agosto', name: 'Luis' },
   { day: 5, month: 'Julio', name: 'Ralph' },
+  { day: 2, month: 'Octubre', name: 'Jedi' },
 ];
 
 exports.getAllBirthdays = (req, res) => {
