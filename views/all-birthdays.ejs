@@ -1,6 +1,5 @@
 <%- include('partials/header') %>
   <div class="container py-5">
-    <!-- Encabezado con color de fondo -->
     <div class="text-center mb-5 bg-primary text-white py-4 rounded-3 shadow">
       <h2 class="display-5 fw-bold">Cumpleaños</h2>
       <button
@@ -12,7 +11,7 @@
       </button>
     </div>
     
-    <!-- Modal de filtros -->
+    <!-- Modal -->
     <div class="modal fade" id="filterModal" tabindex="-1">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content border-0 shadow">
@@ -32,7 +31,7 @@
                   'primary', 'secondary', 'success', 'danger', 'warning', 'info',
                   'primary', 'secondary', 'success', 'danger', 'warning', 'info'
                 ];
-               
+            
                 monthsInOrder.forEach((month, index) => {
               %>
                 <div class="col-4">
@@ -50,7 +49,6 @@
       </div>
     </div>
     
-    <!-- Contenedor de tarjetas de cumpleaños -->
     <div id="birthdays-container" class="row row-cols-1 row-cols-md-3 g-4">
       <% if (birthdays.length === 0) { %>
         <div class="col-12 text-center">
